@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   db:
+    restart: unless-stopped
     image: mariadb:10
     volumes:
       - db_data:/var/lib/mysql
@@ -12,6 +13,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
 
   wp:
+    restart: unless-stopped
     depends_on:
       - db
     image: wordpress:5
@@ -25,6 +27,7 @@ services:
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
 
   nginx:
+    restart: unless-stopped
     image: nginx
     volumes:
       - ./nginx-conf:/etc/nginx/conf.d:ro
