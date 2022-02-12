@@ -1,6 +1,0 @@
-version: '3.7'
-
-services:
-  wp:
-    volumes:
-      - ./wp/wp-config.php:/var/www/html/wp-config.php

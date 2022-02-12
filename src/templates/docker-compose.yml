@@ -17,6 +17,7 @@ services:
     image: wordpress:5
     volumes:
       - wp_data:/var/www/html
+      #wpconfig#- ./wp/wp-config.php:/var/www/html/wp-config.php
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: ${DB_NAME}
@@ -26,10 +27,23 @@ services:
   nginx:
     image: nginx
     volumes:
-      - ./nginx-conf:/etc/nginx/conf.d:r
+      - ./nginx-conf:/etc/nginx/conf.d:ro
+      - certbot-www:/var/www/certbot:ro
+      - certbot-certs:/etc/nginx/ssl/:ro
     ports:
       - 80:80
+      - 443:443
+
+  certbot:
+    image: certbot/certbot
+    profiles:
+      - certbot
+    volumes:
+      - certbot-www:/var/www/certbot:rw
+      - certbot-certs:/etc/letsencrypt:rw
 
 volumes:
   db_data:
   wp_data:
+  certbot-www:
+  certbot-certs:
