@@ -19,7 +19,7 @@ if ! [ -f ./wp/wp-config.php ]; then
     if ! docker-compose exec wp test -f /var/www/html/wp-config.php; then
       sleep 1
     else
-      docker-compose cp wp:/var/www/html/wp-config.php ./wp/wp-config.php
+      docker-compose exec -T wp cat /var/www/html/wp-config.php >./wp/wp-config.php
       break
     fi
   done
