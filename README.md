@@ -12,6 +12,8 @@ This setup includes:
 
 2. DNS record pointing to your VM
 
+3. `aws` CLI
+
 Also check out my cloud-init setup [here](https://github.com/MichaelKim0407/my-cloud-init-configs/blob/master/ubuntu.yml).
 
 ## Installation
@@ -33,6 +35,8 @@ Also check out my cloud-init setup [here](https://github.com/MichaelKim0407/my-c
 
 3. Add a cron job to renew your certificate (see below)
 
+4. Add a cron job to backup your website (see below)
+
 ## Alternative installation without SSL
 
 (If you know what you are doing...)
@@ -48,3 +52,20 @@ bin/renew-cert.sh
 ```
 
 You may set up a cron job to automatically renew your certificate.
+
+## Backup
+
+You must have aws CLI installed, and an s3 bucket accessible from your VM.
+If you are using EC2, the easiest way is to attach an IAM role to your VM.
+
+To manually backup your website, go to your `INSTALL_DIR` and run
+
+```
+sudo bin/backup.sh <s3 bucket name>
+```
+
+The backup will include:
+* Your installation folder
+* All docker volumes in your installation
+
+You may set up a cron job to automatically backup your website.
