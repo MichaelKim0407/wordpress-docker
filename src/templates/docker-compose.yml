@@ -48,9 +48,13 @@ services:
 volumes:
   db-data:
     name: ${COMPOSE_PROJECT_NAME}_db-data
+    #externalvols#external: true
   wp-data:
     name: ${COMPOSE_PROJECT_NAME}_wp-data
+    #externalvols#external: true
   certbot-www:
     name: ${COMPOSE_PROJECT_NAME}_certbot-www
+    #externalvols#external: true
   certbot-certs:
     name: ${COMPOSE_PROJECT_NAME}_certbot-certs
+    #externalvols#external: true
