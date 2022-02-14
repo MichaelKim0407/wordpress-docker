@@ -21,11 +21,12 @@ Also check out my cloud-init setup [here](https://github.com/MichaelKim0407/my-c
 2. Run `install.sh` with the following environment variables:
     * `INSTALL_DIR`: the `docker-compose` directory that you will be using
     * `WP_HOSTNAME`: the hostname of your website (= DNS record)
+    * `COMPOSE_PROJECT_NAME`: project name; optional, default to basename of `INSTALL_DIR`
 
     You may run the command like this:
 
     ```
-    INSTALL_DIR=<install dir> WP_HOSTNAME=<hostname> ./install.sh
+    INSTALL_DIR=<install dir> WP_HOSTNAME=<hostname> COMPOSE_PROJECT_NAME=<project name> ./install.sh
     ```
 
     You will be prompted during SSL certificate generation.

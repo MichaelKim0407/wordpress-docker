@@ -1,0 +1,3 @@
+if [ -z "${COMPOSE_PROJECT_NAME}" ]; then
+  COMPOSE_PROJECT_NAME=$(basename "${INSTALL_DIR}")
+fi

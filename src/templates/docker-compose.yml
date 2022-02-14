@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     image: mariadb:10
     volumes:
-      - db_data:/var/lib/mysql
+      - db-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -18,7 +18,7 @@ services:
       - db
     image: wordpress:5
     volumes:
-      - wp_data:/var/www/html
+      - wp-data:/var/www/html
       #wpconfig#- ./wp/wp-config.php:/var/www/html/wp-config.php
     environment:
       WORDPRESS_DB_HOST: db
@@ -46,7 +46,11 @@ services:
       - certbot-certs:/etc/letsencrypt:rw
 
 volumes:
-  db_data:
-  wp_data:
+  db-data:
+    name: ${COMPOSE_PROJECT_NAME}_db-data
+  wp-data:
+    name: ${COMPOSE_PROJECT_NAME}_wp-data
   certbot-www:
+    name: ${COMPOSE_PROJECT_NAME}_certbot-www
   certbot-certs:
+    name: ${COMPOSE_PROJECT_NAME}_certbot-certs

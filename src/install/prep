@@ -1,0 +1,43 @@
+function print_usage() {
+  echo "INSTALL_DIR=<install dir> WP_HOSTNAME=<hostname> COMPOSE_PROJECT_NAME=<project name> $0"
+}
+
+if [ -z "${INSTALL_DIR}" ] || [ -z "${WP_HOSTNAME}" ]; then
+  print_usage
+  exit 1
+fi
+
+if [ -f "${INSTALL_DIR}" ]; then
+  echo "${INSTALL_DIR} is a file."
+  select userinput in "Overwrite" "Cancel"; do
+    case ${userinput} in
+    Overwrite)
+      rm "${INSTALL_DIR}"
+      break
+      ;;
+    Cancel)
+      exit 2
+      ;;
+    esac
+  done
+elif [ -d "${INSTALL_DIR}" ]; then
+  echo "${INSTALL_DIR} already exists."
+  select userinput in "Overwrite" "Cancel" "Proceed"; do
+    case ${userinput} in
+    Overwrite)
+      rm -rf "${INSTALL_DIR}"
+      break
+      ;;
+    Cancel)
+      exit 2
+      ;;
+    Proceed)
+      break
+      ;;
+    esac
+  done
+fi
+
+mkdir -p "${INSTALL_DIR}"
+
+source "${SRC_DIR}/install/mac"
