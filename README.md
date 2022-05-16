@@ -51,6 +51,12 @@ To manually renew your certificate, go to your `INSTALL_DIR` and run
 bin/renew-cert.sh
 ```
 
+To reload Nginx after renewing the certificate:
+
+```
+bin/nginx-reload.sh
+```
+
 You may set up a cron job to automatically renew your certificate.
 
 ## Backup
