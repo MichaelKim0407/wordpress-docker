@@ -22,6 +22,7 @@ backup_file="/tmp/${backup_name}.tar.gz"
 
 compose_dir=$(realpath .)
 volumes=$(ls -d /var/lib/docker/volumes/* | grep "${COMPOSE_PROJECT_NAME}_")
-tar czf ${backup_file} ${compose_dir} ${volumes}
+tar czf "${backup_file}" "${compose_dir}" ${volumes}
 
-aws s3 cp ${backup_file} s3://${bucket_name}/${COMPOSE_PROJECT_NAME}/
+aws s3 cp "${backup_file}" "s3://${bucket_name}/${COMPOSE_PROJECT_NAME}/" && \
+  rm "${backup_file}"
