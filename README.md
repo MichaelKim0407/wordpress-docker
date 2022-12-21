@@ -6,6 +6,22 @@ This setup includes:
 * Nginx for reverse proxy and SSL
 * Let's Encrypt SSL certificate
 
+## System Requirements
+
+1. Memory usage
+
+   This setup can run reliably with memory usage < 1G.
+   If using EC2 on AWS, choose the `micro` size.
+
+2. Disk space
+
+   This really depends on how much you want to put on your website.
+   The default option for EC2 (8GB) may not be enough.
+   I just went for 30G and it should last me a long time.
+
+   Alternatively, consider setting up an OS disk and a data disk,
+   and mapping `/var/lib/docker` to the data disk.
+
 ## Prerequisites
 
 1. Docker and docker-compose are installed
